@@ -24,6 +24,7 @@ bool sensor4NormallyClosed = true;
 LiquidCrystal lcd(0, 1, 2, 3, 4, 5);
 
 int redLEDPin = 29;
+int redLEDPin2 = 7;
 
 void setup() {
   pinMode(sensor1Pin, INPUT);
@@ -31,6 +32,7 @@ void setup() {
   pinMode(sensor3Pin, INPUT);
   pinMode(sensor4Pin, INPUT);
   pinMode(redLEDPin, OUTPUT);
+  pinMode(redLEDPin2, OUTPUT);
 
   lcd.begin(16, 2);
   lcd.clear();
@@ -107,16 +109,17 @@ void loop() {
 
     lcd.print("   Everything");
     lcd.setCursor(0, 1-((millis() / 1000) % 2));
-    lcd.print("     
-    is open");
+    lcd.print("     is open");
   }
 
   // everything inactive, handle the red LED
   if(!sensor1Active && !sensor2Active && !sensor3Active && !sensor4Active){
     lcd.print("All Clear");
     digitalWrite(redLEDPin, LOW);
+    digitalWrite(redLEDPin2, LOW);
   } else {
     digitalWrite(redLEDPin, HIGH);
+    digitalWrite(redLEDPin2, HIGH);
   }
 
   delay(100);  // rest and prevent some flickering (or is this causing flickering?)
